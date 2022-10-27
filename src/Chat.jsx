@@ -16,7 +16,7 @@ export default function Chat() {
     {"name": "Venezuela"},
   ])
 
-  const handleUserMessageAddition = (userMessageContent, userId, channel) => {
+  const handleUserMessageAddition = (userMessageContent, userId) => {
     const newUserMessages = [...userMessages, {
       content: userMessageContent,
       id: new Date().getTime(),
