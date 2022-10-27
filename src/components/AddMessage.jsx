@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function AddMessage({handleUserMessageAddition}) {
+function AddMessage({handleMessageAddition}) {
   const [inputData, setInputData] = useState('')
 
   const handleInputChange = (e) => {
@@ -9,7 +9,7 @@ function AddMessage({handleUserMessageAddition}) {
 
   const handleAddUserMessageClick = () => {
     if (inputData === '') return
-    handleUserMessageAddition(inputData)
+    handleMessageAddition(inputData)
     setInputData('')
   }
 

@@ -3,57 +3,57 @@ import { useState } from 'react';
 import './App.css';
 
 import AddMessage from './components/AddMessage';
-import UserMessages from './components/UserMessages';
+import Channel from './components/Channel';
 
 export default function Chat() {
-  const [userMessages, setUserMessages] = useState([])
-  const [chatRegion, setChatRegion] = useState("Brasil")
+  const [messages, setMessages] = useState([])
+  const [chatChannel, setChatChannel] = useState("Brasil")
 
-  const regions = ([
+  const channels = ([
     {"name": "Brasil"},
     {"name": "Argentina"},
     {"name": "Peru"},
     {"name": "Venezuela"},
   ])
 
-  const handleUserMessageAddition = (userMessageContent, userId) => {
-    const newUserMessages = [...userMessages, {
-      content: userMessageContent,
+  const handleMessageAddition = (messageContent, userId) => {
+    const newMessages = [...messages, {
+      content: messageContent,
       id: new Date().getTime(),
       userId: userId,
-      channel: chatRegion,
+      channel: chatChannel,
     }]
 
-    setUserMessages(newUserMessages)
+    setMessages(newMessages)
   }
 
-  const handleUserMessageDelete = (id) => {
-    const newUserMessages = userMessages.filter(userMessages => userMessages.id !== id)
-    setUserMessages(newUserMessages)
+  const handleMessageDelete = (id) => {
+    const newMessages = messages.filter(messages => messages.id !== id)
+    setMessages(newMessages)
   }
 
   return(
     <div>
       <div className='content-1'>
         <div className='header'>
-          <p className='title'>Chat {chatRegion}</p>
+          <p className='title'>Chat {chatChannel}</p>
         </div>
 
         <div className='chat-container'>
-          <div className='region-btn'>
-            {regions && regions.map(region => (
+          <div className='channel-btn'>
+            {channels && channels.map(channel => (
             <p 
             onClick={() => 
-            setChatRegion(region.name)}
-            className={region.name === chatRegion ? ("active") : ("inative")}
-            >{region.name}</p>
+            setChatChannel(channel.name)}
+            className={channel.name === chatChannel ? ("active") : ("inative")}
+            >{channel.name}</p>
             ))}
           </div>
           <div className='chat'>
-            <UserMessages
-              channel={chatRegion}
-              userMessage={userMessages}
-              handleUserMessageDelete={handleUserMessageDelete} />
+            <Channel
+              channel={chatChannel}
+              message={messages}
+              handleMessageDelete={handleMessageDelete} />
           </div>
         </div>
       </div>
@@ -65,8 +65,8 @@ export default function Chat() {
 
           <div>
           <AddMessage 
-            handleUserMessageAddition={(content) => {
-            handleUserMessageAddition(content, 'user1', 1 )
+            handleMessageAddition={(content) => {
+            handleMessageAddition(content, 'user1', 1 )
           }} />
           </div>
         </div>
@@ -76,8 +76,8 @@ export default function Chat() {
 
           <div>
             <AddMessage 
-              handleUserMessageAddition={(content) => {
-              handleUserMessageAddition(content, 'user2', 1)
+              handleMessageAddition={(content) => {
+              handleMessageAddition(content, 'user2', 1)
             }}/>
           </div>
         </div>
