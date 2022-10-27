@@ -26,13 +26,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 25rem;
+margin: 0 auto;
 }
 
 .header {
-  margin: 0 auto; 
+  /* margin-left: 100px;  */
   width: 20rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -46,18 +46,14 @@ width: 25rem;
 
 .chat-container {
   display: flex;
+  margin-left: -100px;
 }
 
 .region-btn {
   width: fit-content;
-  margin-left: -100px;  
-  /* position: relative;
-  left: -124px;
-  top: 114px; */
-  /* transform: rotate(270deg); */
 }
 
-.region-btn p {
+.region-btn .inative {
   margin: 0 4px 4px 0;
   background-color: var(--secondary);
   color: #222;
@@ -68,8 +64,24 @@ width: 25rem;
   border-radius: 0.625rem;
 }
 
-.region-btn p:hover {
+.region-btn .active {
+  margin: 0 4px 4px 0;
+  background-color: var(--primary);
+  color: #222;
+  padding:4px 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.625rem;
+}
+
+.region-btn .inative:hover {
   background-color: var(--primary-light);
+  transition: all .3s;
+}
+
+.region-btn- .active:hover {
+  background-color: var(--secondary-light);
   transition: all .3s;
 }
 
@@ -121,9 +133,10 @@ width: 25rem;
 }
 
 .users {
+  /* margin-left: 100px; */
   margin: 0.9rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .user-1 div, .user-2 div {
@@ -159,6 +172,7 @@ margin: .25rem 0.5rem;
 
 .user-1 button {
   background-color: var(--secondary);
+  margin-right: 20px;
 }
 
 .user-1 button:hover {
