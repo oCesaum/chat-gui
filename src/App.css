@@ -1,0 +1,197 @@
+html {
+  color: white;
+}
+
+:root {
+  --primary: #afff2e;
+  --primary-light: #9dff00;
+  --secondary: #6750c0;
+  --secondary-light: #7c69c9;
+}
+
+.App {
+  background-color: #222;
+  height: 100vh;
+}
+
+.chats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.content-1, .content-2 {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 25rem;
+}
+
+.header {
+  margin: 0 auto; 
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.changePage {
+  height: 2rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+  border: solid 1px black;
+  text-align: center;
+}
+
+.chat-container {
+  display: flex;
+}
+
+.region-btn {
+  width: fit-content;
+  margin-left: -100px;  
+  /* position: relative;
+  left: -124px;
+  top: 114px; */
+  /* transform: rotate(270deg); */
+}
+
+.region-btn p {
+  margin: 0 4px 4px 0;
+  background-color: var(--secondary);
+  color: #222;
+  padding:4px 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.625rem;
+}
+
+.region-btn p:hover {
+  background-color: var(--primary-light);
+  transition: all .3s;
+}
+
+.chat {
+  width: 20rem;
+  height: 30rem;
+  overflow: auto;
+  background-color: #9e9e9e;
+  color: black;
+  border-radius: 0.625rem;
+}
+
+.user-message-container-1, .user-message-container-2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.525rem .90rem;
+  min-height: 1rem;
+  max-width: 50%;
+  border-radius: 0.625rem;
+  border: solid 1px black;
+  font-size: small;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.user-message-container-1 {
+  background-color: var(--secondary);
+}
+
+.user-message-container-2 {
+  background-color: var(--primary);
+  margin: 0.3rem 0.25rem 0.3rem 45%;
+}
+
+.userMessage{
+  padding: .25rem;
+  overflow: hidden;
+  margin: .25rem;
+}
+
+.remove-user-message {
+  background-color: transparent;
+  border: none;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  font-size: .7rem;
+  padding: 0 .25rem;
+}
+
+.users {
+  margin: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-1 div, .user-2 div {
+  display: flex;
+  align-items: center;
+}
+
+.user-1 p, .user-2 p {
+margin: .25rem 0.5rem;
+}
+
+.user-1 input, .user-2 input {
+  height: 2rem;
+  width: 7rem;
+  border-radius: 0.625rem;
+  background-color: #9e9e9e;
+  border: solid 1px black;
+  text-align: center;
+  outline: none;
+}
+
+
+.user-1 button, .user-2 button {
+  margin-left: 0.3rem;
+  height: 2.125rem;
+  width: 2.125rem;
+  border-radius: 0.625rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: solid 1px black;
+  transition: .4s;
+}
+
+.user-1 button {
+  background-color: var(--secondary);
+}
+
+.user-1 button:hover {
+  background-color: var(--secondary-light);
+}
+
+.user-2 button {
+  background-color: var(--primary);
+}
+
+.user-2 button:hover {
+  background-color: var(--primary-light);
+}
+
+/* Barra de rolagem */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ccc;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary-light);
+}
+
+.hidden {
+  display: none;
+}
