@@ -13,5 +13,4 @@ export default function Message({message, handleMessageDelete}) {
       </button>
     </div>
   )
-
 }

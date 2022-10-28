@@ -43,6 +43,7 @@ export default function Chat() {
           <div className='channel-btn'>
             {channels && channels.map(channel => (
             <p 
+            key={channel.name}
             onClick={() => 
             setChatChannel(channel.name)}
             className={channel.name === chatChannel ? ("active") : ("inative")}
@@ -52,7 +53,7 @@ export default function Chat() {
           <div className='chat'>
             <Channel
               channel={chatChannel}
-              message={messages}
+              message={messages.filter(msg => msg.channel === chatChannel)}
               handleMessageDelete={handleMessageDelete} />
           </div>
         </div>
