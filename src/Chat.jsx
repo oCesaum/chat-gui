@@ -5,16 +5,17 @@ import './App.css';
 import AddMessage from './components/AddMessage';
 import Channel from './components/Channel';
 
+const channels = [
+  {"name": "Brasil"},
+  {"name": "Argentina"},
+  {"name": "Peru"},
+  {"name": "Venezuela"},
+  {"name": "Chile"},
+]
+
 export default function Chat() {
   const [messages, setMessages] = useState([])
   const [chatChannel, setChatChannel] = useState("Brasil")
-
-  const channels = ([
-    {"name": "Brasil"},
-    {"name": "Argentina"},
-    {"name": "Peru"},
-    {"name": "Venezuela"},
-  ])
 
   const handleMessageAddition = (messageContent, userId) => {
     const newMessages = [...messages, {
@@ -31,6 +32,8 @@ export default function Chat() {
     const newMessages = messages.filter(messages => messages.id !== id)
     setMessages(newMessages)
   }
+
+ const filteredMessages = messages.filter(msg => msg.channel === chatChannel)
 
   return(
     <div>
@@ -52,8 +55,7 @@ export default function Chat() {
           </div>
           <div className='chat'>
             <Channel
-              channel={chatChannel}
-              message={messages.filter(msg => msg.channel === chatChannel)}
+              messages={filteredMessages}
               handleMessageDelete={handleMessageDelete} />
           </div>
         </div>

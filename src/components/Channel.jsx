@@ -1,11 +1,10 @@
 import Message from "./Message"
 
-export default function Channel({message, handleMessageDelete, channel}) {
+export default function Channel({messages, handleMessageDelete}) {
   return (
     <>
-      {message.map(message => 
+      {messages.map(message => 
         <Message 
-          channel={message.channel}
           key={message.id} 
           message={message} 
           handleMessageDelete={handleMessageDelete} />
