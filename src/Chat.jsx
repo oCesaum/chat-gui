@@ -30,16 +30,14 @@ const messages = {
 export default function Chat() {
   const [chatChannel, setChatChannel] = useState("Brasil")
   const [chatChannelId, setChatChannelId] = useState("1")
-  const [channelMessages, setChannelMessages] = useState(messages[chatChannelId])
 
   const changeChannel = (channel) => {
     setChatChannel(channel.name)
     setChatChannelId(channel.id)
-    setChannelMessages(messages[chatChannelId])
   }
 
   const handleMessageAddition = (messageContent, userId) => {
-    const newMessages = [...channelMessages, 
+    const newMessages = [...messages[chatChannelId], 
       { 
         id: `${new Date().getTime()}`,
         content: messageContent,
@@ -47,7 +45,6 @@ export default function Chat() {
       }
     ]
 
-    setChannelMessages(newMessages)
   }
 
   const handleMessageDelete = (id) => {
