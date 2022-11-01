@@ -10,6 +10,7 @@ const channels = {
   '2': "Argentina",
   '3': "Peru",
   '4': "Bolivia",
+  '5': "Venezuela",
 }
 
 const initialMessages = {
