@@ -6,34 +6,61 @@ import AddMessage from './components/AddMessage';
 import Channel from './components/Channel';
 
 const channels = [
-  {"name": "Brasil"},
-  {"name": "Argentina"},
-  {"name": "Peru"},
-  {"name": "Venezuela"},
-  {"name": "Chile"},
+  {"name": "Brasil", "id": "1"},
+  {"name": "Argentina", "id": "2"},
+  {"name": "Peru", "id": "3"},
+  {"name": "Venezuela", "id": "4"},
+  {"name": "Chile", "id": "5"},
 ]
 
+const messages = {
+  "1": [
+   {id: "1", content: "User 1 Brasil", userId:"user1",},
+   {id: "2", content: "User 2 Brasil", userId:"user2",},
+  ] ,
+  "2": [
+   {id: "1", content: "User 1 Brasil 777", userId:"user1",},
+   {id: "2", content: "User 2 Brasil 777", userId:"user2",},
+  ] ,
+  "3": [] ,
+  "4": [] ,
+  "5": [] ,
+ }
+
 export default function Chat() {
-  const [messages, setMessages] = useState([])
   const [chatChannel, setChatChannel] = useState("Brasil")
+  const [chatChannelId, setChatChannelId] = useState("1")
+  const [channelMessages, setChannelMessages] = useState(messages[chatChannelId])
+
+  const changeChannel = (channel) => {
+    setChatChannel(channel.name)
+    setChatChannelId(channel.id)
+    setChannelMessages(messages[chatChannelId])
+  }
 
   const handleMessageAddition = (messageContent, userId) => {
-    const newMessages = [...messages, {
-      content: messageContent,
-      id: new Date().getTime(),
-      userId: userId,
-      channel: chatChannel,
-    }]
+    const newMessages = [...channelMessages, 
+      { 
+        id: `${new Date().getTime()}`,
+        content: messageContent,
+        userId: userId,
+      }
+    ]
 
-    setMessages(newMessages)
+    setChannelMessages(newMessages)
   }
 
   const handleMessageDelete = (id) => {
-    const newMessages = messages.filter(messages => messages.id !== id)
-    setMessages(newMessages)
+    const newMessages = channelMessages.filter(messages => messages.id !== id)
+    setChannelMessages(newMessages)
   }
 
- const filteredMessages = messages.filter(msg => msg.channel === chatChannel)
+  // const filteredMessages = channelMessages
+  console.log(messages)
+  console.log(messages[chatChannelId])
+  // console.log(filteredMessages)
+  console.log(channelMessages)
+
 
   return(
     <div>
@@ -47,15 +74,15 @@ export default function Chat() {
             {channels && channels.map(channel => (
             <p 
             key={channel.name}
-            onClick={() => 
-            setChatChannel(channel.name)}
+            onClick={() => changeChannel(channel)}
             className={channel.name === chatChannel ? ("active") : ("inative")}
             >{channel.name}</p>
             ))}
           </div>
           <div className='chat'>
             <Channel
-              messages={filteredMessages}
+              // messages={filteredMessages}
+              messages={channelMessages}
               handleMessageDelete={handleMessageDelete} />
           </div>
         </div>
@@ -68,6 +95,7 @@ export default function Chat() {
 
           <div>
           <AddMessage 
+            // chatChannelId={chatChannelId}
             handleMessageAddition={(content) => {
             handleMessageAddition(content, 'user1', 1 )
           }} />

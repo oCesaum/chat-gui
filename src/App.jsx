@@ -1,5 +1,4 @@
 import Chat from './Chat';
-
 import './App.css';
 
 function App() {
