@@ -5,15 +5,14 @@ import './App.css';
 import AddMessage from './components/AddMessage';
 import Channel from './components/Channel';
 
-const channels = [
-  {"name": "Brasil", "id": "1"},
-  {"name": "Argentina", "id": "2"},
-  {"name": "Peru", "id": "3"},
-  {"name": "Venezuela", "id": "4"},
-  {"name": "Chile", "id": "5"},
-]
+const channels = {
+  '1': "Brasil",
+  '2': "Argentina",
+  '3': "Peru",
+  '4': "Bolivia",
+}
 
-const messages = {
+const initialMessages = {
   "1": [
    {id: "1", content: "User 1 Brasil", userId:"user1",},
    {id: "2", content: "User 2 Brasil", userId:"user2",},
@@ -28,42 +27,39 @@ const messages = {
  }
 
 export default function Chat() {
-  const [chatChannel, setChatChannel] = useState("Brasil")
   const [chatChannelId, setChatChannelId] = useState("1")
+  const [messages, setMessages] = useState(initialMessages);
 
   const changeChannel = (channel) => {
-    setChatChannel(channel.name)
     setChatChannelId(channel.id)
   }
 
+  const selectedChannel = channels.find(c => c.id===chatChannelId);
+  const channelName = selectedChannel?selectedChannel.name:'nao encontrado';
+
   const handleMessageAddition = (messageContent, userId) => {
-    const newMessages = [...messages[chatChannelId], 
-      { 
-        id: `${new Date().getTime()}`,
-        content: messageContent,
-        userId: userId,
-      }
-    ]
+    const newMessages = { ...messages }; //spread operator
+    newMessages[chatChannelId].push({
+      id: new Date().getTime(),
+      content: messageContent,
+      userId: userId,
+    })
 
+    setMessages(newMessages)
   }
 
-  const handleMessageDelete = (id) => {
-    const newMessages = channelMessages.filter(messages => messages.id !== id)
-    setChannelMessages(newMessages)
-  }
+  // const handleMessageDelete = (id) => {
+  //   const newMessages = channelMessages.filter(messages => messages.id !== id)
+  //   setChannelMessages(newMessages)
+  // }
 
-  // const filteredMessages = channelMessages
-  console.log(messages)
-  console.log(messages[chatChannelId])
-  // console.log(filteredMessages)
-  console.log(channelMessages)
 
 
   return(
     <div>
       <div className='content-1'>
         <div className='header'>
-          <p className='title'>Chat {chatChannel}</p>
+          <p className='title'>Chat {channelName}</p>
         </div>
 
         <div className='chat-container'>
@@ -72,15 +68,16 @@ export default function Chat() {
             <p 
             key={channel.name}
             onClick={() => changeChannel(channel)}
-            className={channel.name === chatChannel ? ("active") : ("inative")}
+            className={channel.name === channelName ? ("active") : ("inative")}
             >{channel.name}</p>
             ))}
           </div>
           <div className='chat'>
             <Channel
               // messages={filteredMessages}
-              messages={channelMessages}
-              handleMessageDelete={handleMessageDelete} />
+              messages={messages[chatChannelId]}
+              // handleMessageDelete={handleMessageDelete} 
+              />
           </div>
         </div>
       </div>

@@ -1,23 +1,17 @@
-const messages = {
-  "Brasil": [
-   {id: "1", content: "User 1 Brasil", userId:"user1",},
-   {id: "2", content: "User 2 Brasil", userId:"user2",},
-  ] ,
-  "Argentina": [
-   {id: "1", content: "User 1 Brasil 777", userId:"user1",},
-   {id: "2", content: "User 2 Brasil 777", userId:"user2",},
-  ] ,
- }
+const channels = [
+  {"name": "Brasil", "id": "1"},
+  {"name": "Argentina", "id": "2"},
+  {"name": "Peru", "id": "3"},
+  {"name": "Venezuela", "id": "4"},
+  {"name": "Chile", "id": "5"},
+]
 
- const nomeCanal = "Brasil"
 
- messages[nomeCanal].push(
-   {id: "2", content: "User 2 Argentina", userId:"user2",},
-   )
+const chatChannelId = '2';
 
-  messages["Bolivia"] = []
-  messages.Bolivia.push(
-   {id: "2", content: "User 2 Argentina", userId:"user2",},
-  )
+// channels.filter
 
- console.log(messages)
+// const filteredChannels = channels.filter(c => c.id===chatChannelId);
+
+const selectedChannel = channels.find(c => c.id === chatChannelId);
+console.log(selectedChannel.name)
