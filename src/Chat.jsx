@@ -22,7 +22,9 @@ const initialMessages = {
    {id: "1", content: "User 1 Brasil 777", userId:"user1",},
    {id: "2", content: "User 2 Brasil 777", userId:"user2",},
   ] ,
-  "3": [] ,
+  "3": [
+   {id: "1", content: "User 1 Peru 777", userId:"user1",},
+  ] ,
   "4": [] ,
   "5": [] ,
  }
@@ -32,16 +34,15 @@ export default function Chat() {
   const [messages, setMessages] = useState(initialMessages);
 
   const changeChannel = (channel) => {
-    setChatChannelId(channel.id)
+    setChatChannelId(channel)
   }
 
-  const selectedChannel = channels.find(c => c.id===chatChannelId);
-  const channelName = selectedChannel?selectedChannel.name:'nao encontrado';
+  const selectedChannel = channels[chatChannelId]
 
   const handleMessageAddition = (messageContent, userId) => {
-    const newMessages = { ...messages }; //spread operator
+    const newMessages = { ...messages }; 
     newMessages[chatChannelId].push({
-      id: new Date().getTime(),
+      id: `${new Date().getTime()}`,
       content: messageContent,
       userId: userId,
     })
@@ -49,27 +50,35 @@ export default function Chat() {
     setMessages(newMessages)
   }
 
-  // const handleMessageDelete = (id) => {
-  //   const newMessages = channelMessages.filter(messages => messages.id !== id)
-  //   setChannelMessages(newMessages)
-  // }
+  const handleMessageDelete = (id) => {
+    const newMessages = { ...messages }; 
+    newMessages[chatChannelId] = newMessages[chatChannelId].filter(message => message.id !== id)
 
+    setMessages(newMessages)
+  }
 
+  const channelsName = []
+
+  for (var i in channels) {
+    if (channels.hasOwnProperty(i)) {
+      channelsName.push({id: i, name: channels[i],})
+    }
+  }
 
   return(
     <div>
       <div className='content-1'>
         <div className='header'>
-          <p className='title'>Chat {channelName}</p>
+          <p className='title'>Chat {selectedChannel}</p>
         </div>
 
         <div className='chat-container'>
           <div className='channel-btn'>
-            {channels && channels.map(channel => (
+            {channelsName.map(channel => (
             <p 
-            key={channel.name}
-            onClick={() => changeChannel(channel)}
-            className={channel.name === channelName ? ("active") : ("inative")}
+            key={channel.id}
+            onClick={() => changeChannel(channel.id)}
+            className={channel.name === selectedChannel ? ("active") : ("inactive")}
             >{channel.name}</p>
             ))}
           </div>
@@ -77,7 +86,7 @@ export default function Chat() {
             <Channel
               // messages={filteredMessages}
               messages={messages[chatChannelId]}
-              // handleMessageDelete={handleMessageDelete} 
+              handleMessageDelete={handleMessageDelete} 
               />
           </div>
         </div>
